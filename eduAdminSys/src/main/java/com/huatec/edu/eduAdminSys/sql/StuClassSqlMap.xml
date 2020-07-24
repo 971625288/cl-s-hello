@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huatec.edu.eduAdminSys.dao.StuClassDao">
+	<!--缓存配置  -->
+	<cache eviction="LRU" flushInterval="30000" size="512" readOnly="true" />
+	
+	<!--select元素  -->
+	<select id="findAll" resultType="com.huatec.edu.eduAdminSys.entity.StuClass">
+		select * from stu_class
+	</select>
+	
+	<!--insert元素  -->
+	<insert id="save" parameterType="com.huatec.edu.eduAdminSys.entity.StuClass"
+		useGeneratedKeys="true" keyProperty="class_id">
+		insert into stu_class (class_name,creator_id) values(#{class_name},#{creator_id})
+	</insert>
+	
+	
+</mapper>

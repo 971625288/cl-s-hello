@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huatec.edu.eduAdminSys.dao.TeacherDao">
+	<!--缓存配置  -->
+	<cache eviction="LRU" flushInterval="30000" size="512" readOnly="true" />
+	
+	<!--select元素  -->
+	<select id="findAll" resultType="com.huatec.edu.eduAdminSys.entity.Teacher">
+		select * from teacher
+	</select>
+	<!-- 根据username查询 -->
+	<select id="findByName" parameterType="string"
+	resultType="com.huatec.edu.eduAdminSys.entity.Teacher">
+		select * from teacher where username=#{username}
+	</select>
+	<!-- 根据teacher_id查询 -->
+	<select id="findById" parameterType="int"
+	resultType="com.huatec.edu.eduAdminSys.entity.Teacher">
+		select * from teacher where teacher_id=#{teacher_id}
+	</select>
+	
+	<!-- delete元素，在此元素内写删除语句 -->
+	<delete id="deleteByName" parameterType="string">
+		delete from teacher where  username=#{ username}
+	</delete>
+	
+	<!--update元素  -->
+	<update id="updateMsg" parameterType="com.huatec.edu.eduAdminSys.entity.Teacher">
+		update teacher
+		<set>
+			<if test="teacher_num != null">
+				teacher_num=#{teacher_num},
+			</if>
+			<if test="teacher_name != null">
+				teacher_name=#{teacher_name},
+			</if>
+			<if test="username != null">
+				username=#{username},
+			</if>
+			<if test="mobile_phone != null">
+				mobile_phone=#{mobile_phone},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+		</set>
+		where teacher_id=#{teacher_id}
+	</update>
+	
+	
+</mapper>
